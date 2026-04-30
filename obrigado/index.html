@@ -236,7 +236,7 @@
             // Função para liberar o botão
             function enableButton(url) {
                 btn.style.opacity = '1';
-                btn.style.pointer - events = 'auto';
+                btn.style.pointerEvents = 'auto';
                 btn.onclick = () => window.location.href = url;
                 statusText.innerText = "Acesso localizado com sucesso! ✅";
             }
@@ -244,7 +244,7 @@
             // Função para pedir email se não houver na URL
             function askForEmail() {
                 btn.style.opacity = '1';
-                btn.style.pointer - events = 'auto';
+                btn.style.pointerEvents = 'auto';
                 statusText.innerText = "Clique abaixo para liberar seu acesso";
                 btn.onclick = () => {
                     const email = prompt("Qual o e-mail que você utilizou na compra?");
@@ -254,7 +254,10 @@
                 };
             }
 
-            if (!emailFromUrl) {
+            // Se o email na URL for o "código" da plataforma não traduzido (ex: [email], {email})
+            const isTag = emailFromUrl && (emailFromUrl.includes('{') || emailFromUrl.includes('[') || emailFromUrl.includes('email'));
+
+            if (!emailFromUrl || isTag) {
                 askForEmail();
                 return;
             }
@@ -278,13 +281,20 @@
                 if (foundToken) {
                     enableButton(`https://area-membros-nu.vercel.app/?token=${foundToken}`);
                 } else {
-                    statusText.innerText = "Ainda não identificamos seu pagamento no sistema...";
+                    statusText.innerText = "Nenhum acesso pendente para este e-mail... ❌";
+                    btn.innerText = "TENTAR COM OUTRO E-MAIL";
                     btn.style.opacity = '1';
-                    btn.style.pointer - events = 'auto';
-                    btn.innerText = "TENTAR NOVAMENTE";
-                    btn.onclick = () => window.location.reload();
+                    btn.style.pointerEvents = 'auto';
+                    btn.onclick = () => {
+                        const email = prompt("Qual o e-mail que você utilizou na compra?");
+                        if (email) {
+                            window.location.href = `https://www.combinetea.online/obrigado?email=${encodeURIComponent(email)}`;
+                        }
+                    };
                 }
             } catch (err) {
+                console.error("Erro:", err);
+                statusText.innerText = "Erro de conexão com o servidor... ⚠️";
                 askForEmail();
             }
         }
