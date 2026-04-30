@@ -512,7 +512,81 @@
     </footer>
     </div>
 
+    <style>
+        /* Estilos das Notificações de Venda - Compacto e com quebra de linha */
+        .sales-notification {
+            position: fixed;
+            bottom: 20px;
+            right: -300px;
+            background-color: #4ade80;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            line-height: 1.2;
+            font-weight: 600;
+            transition: right 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            max-width: 200px; /* Limita a largura para forçar a quebra */
+        }
+
+        .sales-notification.show {
+            right: 20px;
+        }
+
+        .sales-notification .check-icon {
+            font-size: 16px;
+            min-width: 20px;
+        }
+    </style>
+
+    <div id="sales-notification" class="sales-notification">
+        <span class="check-icon">✓</span>
+        <span id="notification-text">Alguém<br>acabou de comprar!</span>
+    </div>
+
     <script>
+        // Lista de 100 nomes brasileiros comuns
+        const names = [
+            "Ana", "Maria", "José", "João", "Antônio", "Francisco", "Carlos", "Paulo", "Pedro", "Lucas",
+            "Luiz", "Marcos", "Gabriel", "Rafael", "Daniel", "Marcelo", "Bruno", "Eduardo", "Felipe", "Rodrigo",
+            "Sérgio", "Ricardo", "Fernando", "Alexandre", "Roberto", "Leonardo", "Adriano", "Fábio", "Márcio", "Tiago",
+            "Juliana", "Aline", "Patrícia", "Camila", "Luciana", "Renata", "Fernanda", "Letícia", "Amanda", "Vanessa",
+            "Beatriz", "Jéssica", "Bruna", "Larissa", "Mariana", "Cristiane", "Daniela", "Priscila", "Tatiana", "Michele",
+            "Mário", "André", "Renato", "Vitor", "Douglas", "Cláudio", "Ronaldo", "Gustavo", "Caio", "Igor",
+            "Erika", "Bárbara", "Carolina", "Débora", "Eliane", "Flávia", "Isabela", "Jaqueline", "Karina", "Mônica",
+            "Milena", "Natália", "Paola", "Raquel", "Sabrina", "Talita", "Úrsula", "Viviane", "Zilda", "Regina",
+            "Cássia", "Sandra", "Marta", "Clara", "Alice", "Helena", "Lúcia", "Rosa", "Dalva", "Iara",
+            "Heitor", "Arthur", "Miguel", "Davi", "Bernardo", "Thales", "Yuri", "Otávio", "Augusto", "Samuel"
+        ];
+
+        const notification = document.getElementById('sales-notification');
+        const notificationText = document.getElementById('notification-text');
+
+        function showNotification() {
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            // Usando innerHTML para permitir o <br>
+            notificationText.innerHTML = `<strong>${randomName}</strong><br>acabou de comprar!`;
+            
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Dispara a cada 4 segundos (intervalo total de 7s se contar o tempo visível + espera)
+        // Para ser exatamente a cada 4s de disparo conforme solicitado:
+        setInterval(showNotification, 4000);
+
+        // Primeiro disparo após 2 segundos de carregamento
+        setTimeout(showNotification, 2000);
+
+        // FAQ Interativo
         document.querySelectorAll('.faq-item').forEach(item => {
             item.style.cursor = 'pointer';
             item.addEventListener('click', () => {
