@@ -125,6 +125,26 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
+        .video-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            background: #000;
+            aspect-ratio: 9 / 16;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
         /* Botão CTA */
         .cta-button {
             display: block;
@@ -338,7 +358,14 @@
             </p>
 
             <div class="mockup-area">
-                <img src="mockup_atividades_tea.png" alt="Mockup do Pack" class="mockup-img">
+                <div class="video-container">
+                    <iframe id="panda-a9a40893-bcc9-4da1-945f-e531f1a4a63e" 
+                        src="https://player-vz-dafcf77f-4d7.tv.pandavideo.com.br/embed/?v=a9a40893-bcc9-4da1-945f-e531f1a4a63e" 
+                        style="border:none;" 
+                        allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" 
+                        allowfullscreen=true 
+                        fetchpriority="high"></iframe>
+                </div>
             </div>
 
             <a href="#oferta" class="cta-button">
