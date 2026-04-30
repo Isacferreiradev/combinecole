@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>40 Atividades Combine e Cole - TEA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-soft: #FFDDE2;
+            --pink-border: #FFB7C5;
+            --blue-soft: #E6F7FF;
+            --blue-border: #B2E2F2;
+            --green-soft: #F6FFED;
+            --green-border: #28a745;
+            --yellow-soft: #FFFBE6;
+            --yellow-border: #FFF9C4;
+            --red-alert: #E74C3C;
+            --cta-green: #28a745;
+            --text-dark: #333333;
+            --white: #FFFFFF;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: #FFFFFF;
+            color: var(--text-dark);
+            line-height: 1.4;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Faixa Superior */
+        .top-bar {
+            background-color: var(--red-alert);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Logo Estilizada */
+        .logo-container {
+            text-align: center;
+            padding: 30px 0 10px;
+        }
+
+        .logo-text {
+            font-size: 48px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-main {
+            color: #7B61FF;
+            /* Roxo estilo Moldes EVA */
+            text-shadow: 2px 2px 0px #eee;
+        }
+
+        .logo-sub {
+            color: #FF4081;
+            font-size: 24px;
+            display: block;
+            margin-top: -10px;
+        }
+
+        .star {
+            position: absolute;
+            font-size: 20px;
+            color: #FFD700;
+        }
+
+        /* Headline */
+        header {
+            padding: 20px 0 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #111;
+        }
+
+        .sub-headline {
+            font-size: 16px;
+            color: #555;
+            margin: 0 auto 30px;
+            font-weight: 400;
+        }
+
+        /* Mockup */
+        .mockup-area {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .mockup-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Botão CTA */
+        .cta-button {
+            display: block;
+            background-color: var(--cta-green);
+            color: white;
+            padding: 20px 20px;
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 0 #1e7e34;
+            transition: all 0.1s ease;
+            margin-bottom: 10px;
+        }
+
+        .cta-button:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #1e7e34;
+        }
+
+        /* Seção "O que você vai receber" */
+        .section-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 25px;
+        }
+
+        .receive-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .receive-card {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid transparent;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .card-icon {
+            font-size: 22px;
+            min-width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-content h3 {
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        .card-content p {
+            font-size: 13px;
+            color: #777;
+            font-weight: 400;
+        }
+
+        .card-pink {
+            background-color: var(--pink-soft);
+            border-color: var(--pink-border);
+        }
+
+        .card-yellow {
+            background-color: var(--yellow-soft);
+            border-color: var(--yellow-border);
+        }
+
+        .card-green {
+            background-color: var(--green-soft);
+            border-color: #C1E1C1;
+        }
+
+        /* Pricing Section (Imagem 5) */
+        .price-container {
+            border: 3px solid var(--green-border);
+            border-radius: 15px;
+            padding: 30px 20px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .price-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .price-comparison {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .price-comparison span {
+            text-decoration: line-through;
+            color: #E74C3C;
+        }
+
+        .huge-price {
+            font-size: 68px;
+            font-weight: 700;
+            color: var(--cta-green);
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .check-list {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .check-circle {
+            width: 24px;
+            height: 24px;
+            background-color: var(--cta-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            min-width: 24px;
+        }
+
+        /* FAQ */
+        .faq-section {
+            background: #F9FAFB;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #999;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .logo-text {
+                font-size: 36px;
+            }
+
+            .huge-price {
+                font-size: 54px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar">
+        🔥 DESCONTO ESPECIAL HOJE NESTA PÁGINA 🔥
+    </div>
+
+    <div class="container">
+
+        <div class="logo-container">
+            <div class="logo-text">
+                <span class="logo-main">40 ATIVIDADES</span>
+                <span class="logo-sub">de Combine e Cole</span>
+            </div>
+        </div>
+
+        <header>
+            <h1>40 Atividades de “Combine e Cole” para Crianças com TEA</h1>
+            <p class="sub-headline">
+                Todos especializados para apoio em casa. Atividades com traços grossos para facilitar o aprendizado e
+                reduzir a frustração.
+            </p>
+
+            <div class="mockup-area">
+                <img src="mockup_atividades_tea.png" alt="Mockup do Pack" class="mockup-img">
+            </div>
+
+            <a href="#oferta" class="cta-button">
+                👉 QUERO AS 40 ATIVIDADES
+            </a>
+            <p style="text-align: center; font-size: 11px; color: #bbb;">🔒 Compra Segura & Acesso Imediato</p>
+        </header>
+
+        <h2 class="section-title">O Que Você Vai Receber</h2>
+        <div class="receive-grid">
+            <div class="receive-card card-pink">
+                <div class="card-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.5 4.5C10.5 3.67157 11.1716 3 12 3C12.8284 3 13.5 3.67157 13.5 4.5V6H15.5C16.8807 6 18 7.11929 18 8.5V10.5H19.5C20.3284 10.5 21 11.1716 21 12C21 12.8284 20.3284 13.5 19.5 13.5H18V15.5C18 16.8807 16.8807 18 15.5 18H13.5V19.5C13.5 20.3284 12.8284 21 12 21C11.1716 21 10.5 20.3284 10.5 19.5V18H8.5C7.11929 18 6 16.8807 6 15.5V13.5H4.5C3.67157 13.5 3 12.8284 3 12C3 11.1716 3.67157 10.5 4.5 10.5H6V8.5C6 7.11929 7.11929 6 8.5 6H10.5V4.5Z"
+                            stroke="#FF4081" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <h3>40 Páginas em PDF</h3>
+                    <p>Ideal para crianças de 2 a 7 anos (ou conforme necessidade).</p>
+                </div>
+            </div>
+            <div class="receive-card card-yellow">
+                <div class="card-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.5 4.5C10.5 3.67157 11.1716 3 12 3C12.8284 3 13.5 3.67157 13.5 4.5V6H15.5C16.8807 6 18 7.11929 18 8.5V10.5H19.5C20.3284 10.5 21 11.1716 21 12C21 12.8284 20.3284 13.5 19.5 13.5H18V15.5C18 16.8807 16.8807 18 15.5 18H13.5V19.5C13.5 20.3284 12.8284 21 12 21C11.1716 21 10.5 20.3284 10.5 19.5V18H8.5C7.11929 18 6 16.8807 6 15.5V13.5H4.5C3.67157 13.5 3 12.8284 3 12C3 11.1716 3.67157 10.5 4.5 10.5H6V8.5C6 7.11929 7.11929 6 8.5 6H10.5V4.5Z"
+                            stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <h3>Versão P&B + Colorida</h3>
+                    <p>Economize tinta ou use o material totalmente pronto para uso.</p>
+                </div>
+            </div>
+            <div class="receive-card card-green">
+                <div class="card-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.5 4.5C10.5 3.67157 11.1716 3 12 3C12.8284 3 13.5 3.67157 13.5 4.5V6H15.5C16.8807 6 18 7.11929 18 8.5V10.5H19.5C20.3284 10.5 21 11.1716 21 12C21 12.8284 20.3284 13.5 19.5 13.5H18V15.5C18 16.8807 16.8807 18 15.5 18H13.5V19.5C13.5 20.3284 12.8284 21 12 21C11.1716 21 10.5 20.3284 10.5 19.5V18H8.5C7.11929 18 6 16.8807 6 15.5V13.5H4.5C3.67157 13.5 3 12.8284 3 12C3 11.1716 3.67157 10.5 4.5 10.5H6V8.5C6 7.11929 7.11929 6 8.5 6H10.5V4.5Z"
+                            stroke="#28a745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <h3>Acesso Vitalício</h3>
+                    <p>O material é seu para sempre. Imprima quantas vezes quiser.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Bônus (Igual à Imagem 4) -->
+        <div
+            style="background-color: #f0fdf4; border: 2px dashed #28a745; border-radius: 20px; padding: 40px 15px; margin-top: 50px; text-align: center;">
+            <h2 class="section-title" style="margin-top: 0; color: #166534; font-size: 28px;">🎁 E ainda você recebe 3
+                Bônus Grátis</h2>
+
+            <div style="display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 30px;">
+                <!-- Bonus Card 1 -->
+                <div
+                    style="background: white; border-radius: 20px; overflow: hidden; border: 1px solid #c1e1c1; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+                    <img src="bonus_certificado.png" alt="Bônus 1" style="width: 100%; height: auto; display: block;">
+                    <div style="padding: 20px; text-align: center;">
+                        <h3 style="font-size: 18px; color: #166534; margin-bottom: 5px;">Certificado de Conclusão</h3>
+                        <p style="font-size: 13px; color: #666;">Um lindo certificado com tema de quebra-cabeça para o
+                            seu pequeno.</p>
+                    </div>
+                </div>
+
+                <!-- Bonus Card 2 -->
+                <div
+                    style="background: white; border-radius: 20px; overflow: hidden; border: 1px solid #c1e1c1; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+                    <img src="bonus_atividades.png" alt="Bônus 2" style="width: 100%; height: auto; display: block;">
+                    <div style="padding: 20px; text-align: center;">
+                        <h3 style="font-size: 18px; color: #166534; margin-bottom: 5px;">+10 Atividades Extras</h3>
+                        <p style="font-size: 13px; color: #666;">Folhas bônus exclusivas com foco sensorial e peças de
+                            encaixe.</p>
+                    </div>
+                </div>
+
+                <!-- Bonus Card 3 -->
+                <div style="background: white; border-radius: 20px; overflow: hidden; border: 1px solid #c1e1c1; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+                    <img src="bonus_guia.png" alt="Bônus 3" style="width: 100%; height: auto; display: block;">
+                    <div style="padding: 20px; text-align: center;">
+                        <h3 style="font-size: 18px; color: #166534; margin-bottom: 5px;">Guia de Mediação TEA</h3>
+                        <p style="font-size: 13px; color: #666;">Manual prático de como transformar cada atividade em um
+                            momento de aprendizado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="price-container" id="oferta">
+            <div class="price-title">40 ATIVIDADES COMBINE E COLE</div>
+            <div class="price-comparison">De R$ 47,00 Por Apenas: <span>R$ 47,00</span></div>
+            <div class="huge-price">R$ 9,90</div>
+
+            <div class="check-list">
+                <div class="check-item"><span class="check-circle">✓</span> 40 ATIVIDADES EM PDF</div>
+                <div class="check-item"><span class="check-circle">✓</span> VERSÃO COLORIDA E P&B</div>
+                <div class="check-item"><span class="check-circle">✓</span> BÔNUS: CERTIFICADO DE CONCLUSÃO</div>
+                <div class="check-item"><span class="check-circle">✓</span> BÔNUS: +10 ATIVIDADES EXTRAS</div>
+                <div class="check-item"><span class="check-circle">✓</span> BÔNUS: GUIA DE MEDIAÇÃO</div>
+                <div class="check-item"><span class="check-circle">✓</span> SUPORTE 24/7</div>
+                <div class="check-item"><span class="check-circle">✓</span> ACESSO IMEDIATO</div>
+                <div class="check-item"><span class="check-circle">✓</span> GARANTIA DE 7 DIAS</div>
+            </div>
+
+            <a href="#" class="cta-button">
+                👉 Comprar agora
+            </a>
+        </div>
+
+        <!-- Aviso de Entrega por E-mail (Conforme Imagem) -->
+        <div style="border: 2px solid #28a745; border-radius: 20px; padding: 20px; margin-top: 20px; display: flex; align-items: center; gap: 20px; text-align: left;">
+            <div style="background-color: #28a745; min-width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M22 6L12 13L2L6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <p style="font-size: 16px; font-weight: 600; color: #333; line-height: 1.4;">Após a compra, você recebe acesso ao Material em PDF diretamente no seu E-mail</p>
+        </div>
+
+        <div class="faq-section">
+            <h2 class="section-title" style="margin-top: 0;">Perguntas Frequentes</h2>
+            <div class="faq-item">
+                <div class="faq-question">Como eu recebo o material? <span>▼</span></div>
+                <p style="font-size: 14px; color: #777; display: none;">O acesso é enviado imediatamente para o seu
+                    e-mail após a compra.</p>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">O material é físico? <span>▼</span></div>
+                <p style="font-size: 14px; color: #777; display: none;">Não, o material é digital em formato PDF para
+                    você imprimir em casa.</p>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Serve para qual idade? <span>▼</span></div>
+                <p style="font-size: 14px; color: #777; display: none;">Ideal para crianças com TEA em fase de
+                    desenvolvimento de base (2 a 7 anos).</p>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Quais as formas de pagamento? <span>▼</span></div>
+                <p style="font-size: 14px; color: #777; display: none;">Você pode pagar via PIX ou Cartão de Crédito com
+                    aprovação imediata.</p>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Por quanto tempo tenho acesso? <span>▼</span></div>
+                <p style="font-size: 14px; color: #777; display: none;">O acesso é vitalício. Uma vez comprado, o
+                    material é seu para sempre.</p>
+            </div>
+        </div>
+
+        <!-- Seção Precisa de Ajuda -->
+        <div
+            style="text-align: center; margin-top: 50px; padding: 30px; background: #fff; border-radius: 20px; border: 1px solid #eee;">
+            <h3 style="font-size: 20px; margin-bottom: 15px;">🤔 Precisa de ajuda?</h3>
+            <p style="font-size: 14px; color: #666; margin-bottom: 20px;">Fale conosco pelo WhatsApp se tiver qualquer
+                dúvida sobre o material.</p>
+            <a href="#" class="cta-button"
+                style="background-color: #128C7E; box-shadow: 0 5px 0 #075E54; max-width: 300px; margin: 0 auto; font-size: 18px;">
+                💬 Chamar no WhatsApp
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <footer>
+        <p>© 40 Atividades Combine e Cole - Todos os direitos reservados.</p>
+        <p>Material de apoio pedagógico.</p>
+    </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.style.cursor = 'pointer';
+            item.addEventListener('click', () => {
+                const answer = item.querySelector('p');
+                const span = item.querySelector('span');
+                const isVisible = answer.style.display === 'block';
+                
+                answer.style.display = isVisible ? 'none' : 'block';
+                span.textContent = isVisible ? '▼' : '▲';
+            });
+        });
+    </script>
+</body>
+
+</html>
