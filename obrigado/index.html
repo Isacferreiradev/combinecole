@@ -227,19 +227,6 @@
     </div>
 
     <script>
-        // Verificação de acesso autorizado
-        (function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const emailParam = urlParams.get('email');
-            const purchaseFlag = sessionStorage.getItem('purchase_initiated');
-
-            // Se não tem email na URL (acesso direto ou link de email) 
-            // E não veio de um clique no botão de compra nesta sessão, redireciona
-            if (!emailParam && !purchaseFlag) {
-                window.location.href = '../index.html';
-            }
-        })();
-
         async function init() {
             const urlParams = new URLSearchParams(window.location.search);
             const emailFromUrl = urlParams.get('email');
@@ -276,40 +263,62 @@
             }
 
             try {
-                // Tenta buscar o token por 3 vezes (caso o webhook demore um pouquinho)
+                // Tenta buscar o token por 5 vezes (polling)
                 let attempts = 0;
                 let foundToken = null;
+                let recentSales = [];
+                const saleIdFromUrl = urlParams.get('venda');
 
-                while (attempts < 5 && !foundToken) {
-                    const response = await fetch(`https://area-membros-nu.vercel.app/api/get-token?email=${encodeURIComponent(emailFromUrl)}`);
+                while (attempts < 6 && !foundToken) {
+                    const response = await fetch(`https://area-membros-nu.vercel.app/api/get-token?email=${encodeURIComponent(emailFromUrl || '')}&venda=${encodeURIComponent(saleIdFromUrl || '')}`);
                     const data = await response.json();
+
                     if (data.token) {
                         foundToken = data.token;
-                    } else {
+                    } else if (data.recent_sales && data.recent_sales.length > 0) {
+                        recentSales = data.recent_sales;
+                        // Se tiver apenas UMA venda recente, libera automático
+                        if (recentSales.length === 1) {
+                            foundToken = recentSales[0].token;
+                        } else {
+                            // Se tiver mais de uma, para o loop para mostrar as opções
+                            break;
+                        }
+                    }
+
+                    if (!foundToken) {
                         attempts++;
-                        await new Promise(r => setTimeout(r, 1500)); // Espera 1.5 seg
+                        await new Promise(r => setTimeout(r, 2000));
                     }
                 }
 
                 if (foundToken) {
                     enableButton(`https://area-membros-nu.vercel.app/?token=${foundToken}`);
+                } else if (recentSales.length > 1) {
+                    // Múltiplas vendas: Deixa o usuário escolher a dele
+                    statusText.innerText = "Encontramos algumas compras recentes. Qual é o seu e-mail?";
+                    const optionsHtml = recentSales.map(sale => `
+                        <button class="btn-main" style="font-size: 1rem; padding: 15px; margin-bottom: 10px;" 
+                                onclick="window.location.href='https://area-membros-nu.vercel.app/?token=${sale.token}'">
+                            É o meu: ${sale.email_masked}
+                        </button>
+                    `).join('');
+
+                    btn.style.display = 'none'; // Esconde o botão principal
+                    btn.insertAdjacentHTML('afterend', `<div id="sale-options">${optionsHtml}</div>`);
                 } else {
-                    statusText.innerText = "Nenhum acesso pendente para este e-mail... ❌";
-                    btn.innerText = "TENTAR COM OUTRO E-MAIL";
+                    statusText.innerText = "Nenhum acesso identificado automaticamente... ❌";
+                    btn.innerText = "CLIQUE PARA INFORMAR SEU E-MAIL";
                     btn.style.opacity = '1';
                     btn.style.pointerEvents = 'auto';
-                    btn.onclick = () => {
-                        const email = prompt("Qual o e-mail que você utilizou na compra?");
-                        if (email) {
-                            window.location.href = `https://www.combinetea.online/obrigado?email=${encodeURIComponent(email)}`;
-                        }
-                    };
+                    btn.onclick = () => askForEmail();
                 }
             } catch (err) {
                 console.error("Erro:", err);
-                statusText.innerText = "Erro de conexão com o servidor... ⚠️";
+                statusText.innerText = "Erro de conexão... ⚠️";
                 askForEmail();
             }
+
         }
 
         init();
