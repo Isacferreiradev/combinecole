@@ -420,7 +420,8 @@
                 </div>
 
                 <!-- Bonus Card 3 -->
-                <div style="background: white; border-radius: 20px; overflow: hidden; border: 1px solid #c1e1c1; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+                <div
+                    style="background: white; border-radius: 20px; overflow: hidden; border: 1px solid #c1e1c1; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
                     <img src="bonus_guia.png" alt="Bônus 3" style="width: 100%; height: auto; display: block;">
                     <div style="padding: 20px; text-align: center;">
                         <h3 style="font-size: 18px; color: #166534; margin-bottom: 5px;">Guia de Mediação TEA</h3>
@@ -447,20 +448,26 @@
                 <div class="check-item"><span class="check-circle">✓</span> GARANTIA DE 7 DIAS</div>
             </div>
 
-            <a href="#" class="cta-button">
+            <a href="https://pay.lowify.com.br/checkout?product_id=HEUE9Z" class="cta-button">
                 👉 Comprar agora
             </a>
         </div>
 
         <!-- Aviso de Entrega por E-mail (Conforme Imagem) -->
-        <div style="border: 2px solid #28a745; border-radius: 20px; padding: 20px; margin-top: 20px; display: flex; align-items: center; gap: 20px; text-align: left;">
-            <div style="background-color: #28a745; min-width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+        <div
+            style="border: 2px solid #28a745; border-radius: 20px; padding: 20px; margin-top: 20px; display: flex; align-items: center; gap: 20px; text-align: left;">
+            <div
+                style="background-color: #28a745; min-width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M22 6L12 13L2L6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path
+                        d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
+                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M22 6L12 13L2L6" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
                 </svg>
             </div>
-            <p style="font-size: 16px; font-weight: 600; color: #333; line-height: 1.4;">Após a compra, você recebe acesso ao Material em PDF diretamente no seu E-mail</p>
+            <p style="font-size: 16px; font-weight: 600; color: #333; line-height: 1.4;">Após a compra, você recebe
+                acesso ao Material em PDF diretamente no seu E-mail</p>
         </div>
 
         <div class="faq-section">
@@ -522,7 +529,7 @@
             color: white;
             padding: 8px 15px;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             z-index: 10000;
             display: flex;
             align-items: center;
@@ -531,7 +538,8 @@
             line-height: 1.2;
             font-weight: 600;
             transition: right 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            max-width: 200px; /* Limita a largura para forçar a quebra */
+            max-width: 200px;
+            /* Limita a largura para forçar a quebra */
         }
 
         .sales-notification.show {
@@ -571,7 +579,7 @@
             const randomName = names[Math.floor(Math.random() * names.length)];
             // Usando innerHTML para permitir o <br>
             notificationText.innerHTML = `<strong>${randomName}</strong><br>acabou de comprar!`;
-            
+
             notification.classList.add('show');
 
             setTimeout(() => {
@@ -593,7 +601,7 @@
                 const answer = item.querySelector('p');
                 const span = item.querySelector('span');
                 const isVisible = answer.style.display === 'block';
-                
+
                 answer.style.display = isVisible ? 'none' : 'block';
                 span.textContent = isVisible ? '▼' : '▲';
             });
