@@ -227,6 +227,19 @@
     </div>
 
     <script>
+        // Verificação de acesso autorizado
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const emailParam = urlParams.get('email');
+            const purchaseFlag = sessionStorage.getItem('purchase_initiated');
+
+            // Se não tem email na URL (acesso direto ou link de email) 
+            // E não veio de um clique no botão de compra nesta sessão, redireciona
+            if (!emailParam && !purchaseFlag) {
+                window.location.href = '../index.html';
+            }
+        })();
+
         async function init() {
             const urlParams = new URLSearchParams(window.location.search);
             const emailFromUrl = urlParams.get('email');

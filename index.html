@@ -606,6 +606,16 @@
                 span.textContent = isVisible ? '▼' : '▲';
             });
         });
+
+        // Proteção da página de obrigado
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Se for o botão do WhatsApp, não marcamos como compra iniciada (ou talvez sim, dependendo do desejo, mas aqui focamos na compra real)
+                if (this.href.includes('pay.lowify.com.br')) {
+                    sessionStorage.setItem('purchase_initiated', 'true');
+                }
+            });
+        });
     </script>
 </body>
 
