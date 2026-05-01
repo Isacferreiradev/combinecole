@@ -127,43 +127,33 @@
                 status.innerText = "Acesso localizado! ✅";
             }
 
-            // Tenta buscar o acesso por até 10 vezes (20 segundos no total)
+            function askForEmail() {
+                status.innerText = "Não localizamos automaticamente. Qual seu e-mail de compra?";
+                btn.innerText = "INFORMAR MEU E-MAIL";
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+                btn.onclick = () => {
+                    const email = prompt("Digite o e-mail que você usou na compra:");
+                    if (email) window.location.href = `?email=${encodeURIComponent(email)}`;
+                };
+            }
+
+            // Tenta buscar o acesso por até 10 vezes
             for (let i = 0; i < 10; i++) {
                 try {
-                    const url = tokenParam
-                        ? `https://area-membros-nu.vercel.app/api/get-token?venda=${encodeURIComponent(tokenParam)}&email=${encodeURIComponent(tokenParam)}`
-                        : `https://area-membros-nu.vercel.app/api/get-token`;
-
-                    const res = await fetch(url);
+                    const res = await fetch(`https://area-membros-nu.vercel.app/api/get-token?token=${encodeURIComponent(tokenParam || '')}&email=${encodeURIComponent(tokenParam || '')}`);
                     const data = await res.json();
 
                     if (data.token) {
                         liberar(data.token);
                         return;
                     }
-
-                    if (data.recent_sales && data.recent_sales.length === 1) {
-                        liberar(data.recent_sales[0].token);
-                        return;
-                    }
-
-                    if (data.recent_sales && data.recent_sales.length > 1) {
-                        status.innerText = "Múltiplas compras detectadas. Por favor, use o link enviado no seu e-mail ou chame o suporte.";
-                        return;
-                    }
-
-                    status.innerText = `Aguardando confirmação... (${i + 1}/10)`;
-                } catch (e) {
-                    console.error("Erro na busca:", e);
-                }
+                    status.innerText = `Buscando seu acesso... (${i + 1}/10)`;
+                } catch (e) { console.error(e); }
                 await new Promise(r => setTimeout(r, 2000));
             }
 
-            status.innerText = "Não conseguimos localizar seu acesso automaticamente. Chame no suporte abaixo.";
-            btn.style.opacity = '1';
-            btn.style.pointerEvents = 'auto';
-            btn.innerText = "TENTAR NOVAMENTE";
-            btn.onclick = () => window.location.reload();
+            askForEmail();
         }
         checkAccess();
     </script>
