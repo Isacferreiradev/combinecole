@@ -332,6 +332,59 @@
                 font-size: 54px;
             }
         }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .testimonials-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            justify-content: center;
+        }
+
+        .testimonials-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .testimonial-card {
+            flex: 0 0 auto;
+            width: 300px;
+            scroll-snap-align: center;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background: white;
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .testimonials-slider {
+                justify-content: flex-start;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .testimonial-card {
+                width: 280px;
+            }
+        }
     </style>
 </head>
 
@@ -497,6 +550,19 @@
                 acesso ao Material em PDF diretamente no seu E-mail</p>
         </div>
 
+        <!-- Seção: Quem comprou, adorou! -->
+        <div class="testimonials-section">
+            <h2 class="section-title">Quem comprou, adorou!</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <img src="depoimento1.png" alt="Depoimento de cliente satisfeito">
+                </div>
+                <div class="testimonial-card">
+                    <img src="depoimento2.png" alt="Depoimento de cliente satisfeito">
+                </div>
+            </div>
+        </div>
+
         <div class="faq-section">
             <h2 class="section-title" style="margin-top: 0;">Perguntas Frequentes</h2>
             <div class="faq-item">
@@ -532,7 +598,7 @@
             <h3 style="font-size: 20px; margin-bottom: 15px;">🤔 Precisa de ajuda?</h3>
             <p style="font-size: 14px; color: #666; margin-bottom: 20px;">Fale conosco pelo WhatsApp se tiver qualquer
                 dúvida sobre o material.</p>
-            <a href="#" class="cta-button"
+            <a href="https://wa.me/5521969836161?text=Olá, preciso de ajuda com o Pack de Atividades." class="cta-button"
                 style="background-color: #128C7E; box-shadow: 0 5px 0 #075E54; max-width: 300px; margin: 0 auto; font-size: 18px;">
                 💬 Chamar no WhatsApp
             </a>
