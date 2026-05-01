@@ -93,8 +93,9 @@
         }
 
         #status-text {
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: 600;
             margin-bottom: 20px;
             display: block;
         }
@@ -115,47 +116,54 @@
     <script>
         async function checkAccess() {
             const params = new URLSearchParams(window.location.search);
-            const token = params.get('token') || params.get('venda');
+            const tokenParam = params.get('token') || params.get('venda') || params.get('email');
             const status = document.getElementById('status-text');
             const btn = document.getElementById('main-btn');
-
-            if (!token) {
-                status.innerText = "Aguardando confirmação de pagamento...";
-                // Tenta buscar o acesso mais recente do banco (Busca Automática)
-                const res = await fetch(`https://area-membros-nu.vercel.app/api/get-token`);
-                const data = await res.json();
-                if (data.recent_sales && data.recent_sales.length === 1) {
-                    liberar(data.recent_sales[0].token);
-                } else {
-                    status.innerText = "Por favor, aguarde o redirecionamento ou informe seu e-mail no suporte.";
-                }
-                return;
-            }
-
-            try {
-                // Tenta validar o token/venda por até 5 vezes
-                let found = false;
-                for (let i = 0; i < 6; i++) {
-                    const res = await fetch(`https://area-membros-nu.vercel.app/api/get-token?venda=${token}`);
-                    const data = await res.json();
-                    if (data.token) {
-                        liberar(data.token);
-                        found = true;
-                        break;
-                    }
-                    await new Promise(r => setTimeout(r, 2000));
-                }
-                if (!found) status.innerText = "Acesso ainda não identificado. Tente atualizar a página.";
-            } catch (e) {
-                status.innerText = "Erro ao conectar com o servidor.";
-            }
 
             function liberar(userToken) {
                 btn.style.opacity = '1';
                 btn.style.pointerEvents = 'auto';
                 btn.onclick = () => window.location.href = `https://area-membros-nu.vercel.app/?token=${userToken}`;
-                status.innerText = "Acesso liberado com sucesso! ✅";
+                status.innerText = "Acesso localizado! ✅";
             }
+
+            // Tenta buscar o acesso por até 10 vezes (20 segundos no total)
+            for (let i = 0; i < 10; i++) {
+                try {
+                    const url = tokenParam
+                        ? `https://area-membros-nu.vercel.app/api/get-token?venda=${encodeURIComponent(tokenParam)}&email=${encodeURIComponent(tokenParam)}`
+                        : `https://area-membros-nu.vercel.app/api/get-token`;
+
+                    const res = await fetch(url);
+                    const data = await res.json();
+
+                    if (data.token) {
+                        liberar(data.token);
+                        return;
+                    }
+
+                    if (data.recent_sales && data.recent_sales.length === 1) {
+                        liberar(data.recent_sales[0].token);
+                        return;
+                    }
+
+                    if (data.recent_sales && data.recent_sales.length > 1) {
+                        status.innerText = "Múltiplas compras detectadas. Por favor, use o link enviado no seu e-mail ou chame o suporte.";
+                        return;
+                    }
+
+                    status.innerText = `Aguardando confirmação... (${i + 1}/10)`;
+                } catch (e) {
+                    console.error("Erro na busca:", e);
+                }
+                await new Promise(r => setTimeout(r, 2000));
+            }
+
+            status.innerText = "Não conseguimos localizar seu acesso automaticamente. Chame no suporte abaixo.";
+            btn.style.opacity = '1';
+            btn.style.pointerEvents = 'auto';
+            btn.innerText = "TENTAR NOVAMENTE";
+            btn.onclick = () => window.location.reload();
         }
         checkAccess();
     </script>
