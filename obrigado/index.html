@@ -9,7 +9,7 @@
     <style>
         :root {
             --primary: #10B981;
-            --primary-light: #ECFDF5;
+            --primary-dark: #059669;
             --text-dark: #1E293B;
             --text-muted: #64748B;
             --bg-light: #F8FAFC;
@@ -36,22 +36,50 @@
             max-width: 480px;
             width: 100%;
             background: white;
-            padding: 50px 30px;
+            padding: 40px 30px;
             border-radius: 32px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
             text-align: center;
         }
 
         h1 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 800;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+            color: var(--text-dark);
         }
 
         .subtitle {
             color: var(--text-muted);
-            margin-bottom: 40px;
-            font-size: 1.1rem;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: 2px solid #E2E8F0;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary);
         }
 
         .btn-main {
@@ -61,21 +89,26 @@
             background: var(--primary);
             color: white;
             text-decoration: none;
-            padding: 24px 32px;
-            border-radius: 20px;
+            padding: 18px 32px;
+            border-radius: 16px;
             font-weight: 800;
             width: 100%;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: all 0.3s;
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-            margin-bottom: 24px;
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
             border: none;
             cursor: pointer;
         }
 
         .btn-main:hover {
-            transform: translateY(-3px);
-            filter: brightness(1.05);
+            transform: translateY(-2px);
+            background: var(--primary-dark);
+        }
+
+        .btn-main:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .btn-whatsapp {
@@ -85,19 +118,27 @@
             background: #F1F5F9;
             color: #475569;
             text-decoration: none;
-            padding: 16px 24px;
-            border-radius: 16px;
+            padding: 14px 20px;
+            border-radius: 12px;
             font-weight: 700;
             width: 100%;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            margin-top: 20px;
         }
 
-        #status-text {
-            font-size: 1rem;
-            color: var(--primary);
+        #status-msg {
+            margin-top: 15px;
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 20px;
             display: block;
+        }
+
+        .error {
+            color: #EF4444;
+        }
+
+        .success {
+            color: var(--primary);
         }
     </style>
 </head>
@@ -105,57 +146,68 @@
 <body>
     <div class="container">
         <h1>Compra Aprovada!</h1>
-        <p class="subtitle">Seu material já está liberado. Clique no botão abaixo para começar agora mesmo!</p>
-        <span id="status-text">Verificando seu acesso...</span>
-        <button id="main-btn" class="btn-main" style="opacity: 0.5; pointer-events: none;">
-            ACESSAR MEU MATERIAL
-        </button>
-        <a href="https://wa.me/55SEUNUMEROHERE" class="btn-whatsapp">DÚVIDAS? CHAME NO WHATSAPP</a>
+        <p class="subtitle">Informe seu e-mail de compra abaixo para liberar o seu material agora mesmo.</p>
+
+        <div class="input-group">
+            <label for="email-input">E-mail da Compra</label>
+            <input type="email" id="email-input" placeholder="seuemail@exemplo.com">
+        </div>
+
+        <button id="verify-btn" class="btn-main">LIBERAR MEU ACESSO</button>
+
+        <span id="status-msg"></span>
+
+        <a href="https://wa.me/55SEUNUMEROHERE" class="btn-whatsapp">PRECISA DE AJUDA? CHAME NO WHATSAPP</a>
     </div>
 
     <script>
-        async function checkAccess() {
-            const params = new URLSearchParams(window.location.search);
-            const tokenParam = params.get('token') || params.get('venda') || params.get('email');
-            const status = document.getElementById('status-text');
-            const btn = document.getElementById('main-btn');
+        const btn = document.getElementById('verify-btn');
+        const input = document.getElementById('email-input');
+        const status = document.getElementById('status-msg');
 
-            function liberar(userToken) {
-                btn.style.opacity = '1';
-                btn.style.pointerEvents = 'auto';
-                btn.onclick = () => window.location.href = `https://area-membros-nu.vercel.app/?token=${userToken}`;
-                status.innerText = "Acesso localizado! ✅";
-            }
-
-            function askForEmail() {
-                status.innerText = "Não localizamos automaticamente. Qual seu e-mail de compra?";
-                btn.innerText = "INFORMAR MEU E-MAIL";
-                btn.style.opacity = '1';
-                btn.style.pointerEvents = 'auto';
-                btn.onclick = () => {
-                    const email = prompt("Digite o e-mail que você usou na compra:");
-                    if (email) window.location.href = `?email=${encodeURIComponent(email)}`;
-                };
-            }
-
-            // Tenta buscar o acesso por até 10 vezes
-            for (let i = 0; i < 10; i++) {
-                try {
-                    const res = await fetch(`https://area-membros-nu.vercel.app/api/get-token?token=${encodeURIComponent(tokenParam || '')}&email=${encodeURIComponent(tokenParam || '')}`);
-                    const data = await res.json();
-
-                    if (data.token) {
-                        liberar(data.token);
-                        return;
-                    }
-                    status.innerText = `Buscando seu acesso... (${i + 1}/10)`;
-                } catch (e) { console.error(e); }
-                await new Promise(r => setTimeout(r, 2000));
-            }
-
-            askForEmail();
+        // Tenta pegar o email da URL se existir (conveniência)
+        const urlParams = new URLSearchParams(window.location.search);
+        const emailParam = urlParams.get('email') || urlParams.get('token');
+        if (emailParam && emailParam.includes('@')) {
+            input.value = emailParam;
         }
-        checkAccess();
+
+        btn.onclick = async () => {
+            const email = input.value.trim();
+            if (!email || !email.includes('@')) {
+                status.innerText = "Por favor, digite um e-mail válido.";
+                status.className = "error";
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = "VERIFICANDO...";
+            status.innerText = "";
+
+            try {
+                // Busca o acesso no banco de dados
+                const res = await fetch(`https://area-membros-nu.vercel.app/api/get-token?email=${encodeURIComponent(email)}&venda=${encodeURIComponent(email)}`);
+                const data = await res.json();
+
+                if (data.token) {
+                    status.innerText = "Acesso localizado! Redirecionando...";
+                    status.className = "success";
+                    setTimeout(() => {
+                        window.location.href = `https://area-membros-nu.vercel.app/?token=${data.token}`;
+                    }, 1000);
+                } else {
+                    status.innerText = "Acesso não encontrado. Verifique o e-mail ou aguarde 1 minuto.";
+                    status.className = "error";
+                    btn.disabled = false;
+                    btn.innerText = "LIBERAR MEU ACESSO";
+                }
+            } catch (e) {
+                status.innerText = "Erro de conexão. Tente novamente.";
+                status.className = "error";
+                btn.disabled = false;
+                btn.innerText = "LIBERAR MEU ACESSO";
+            }
+        };
     </script>
 </body>
 
