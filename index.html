@@ -8,6 +8,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1718173492529921');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1718173492529921&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck
+        data-utmify-prevent-subids async defer></script>
+
     <style>
         :root {
             --pink-soft: #FFDDE2;
@@ -381,6 +405,7 @@
                 padding-left: 20px;
                 padding-right: 20px;
             }
+
             .testimonial-card {
                 width: 280px;
             }
@@ -412,12 +437,10 @@
 
             <div class="mockup-area">
                 <div class="video-container">
-                    <iframe id="panda-a9a40893-bcc9-4da1-945f-e531f1a4a63e" 
-                        src="https://player-vz-dafcf77f-4d7.tv.pandavideo.com.br/embed/?v=a9a40893-bcc9-4da1-945f-e531f1a4a63e" 
-                        style="border:none;" 
-                        allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" 
-                        allowfullscreen=true 
-                        fetchpriority="high"></iframe>
+                    <iframe id="panda-a9a40893-bcc9-4da1-945f-e531f1a4a63e"
+                        src="https://player-vz-dafcf77f-4d7.tv.pandavideo.com.br/embed/?v=a9a40893-bcc9-4da1-945f-e531f1a4a63e"
+                        style="border:none;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture"
+                        allowfullscreen=true fetchpriority="high"></iframe>
                 </div>
             </div>
 
@@ -598,7 +621,8 @@
             <h3 style="font-size: 20px; margin-bottom: 15px;">🤔 Precisa de ajuda?</h3>
             <p style="font-size: 14px; color: #666; margin-bottom: 20px;">Fale conosco pelo WhatsApp se tiver qualquer
                 dúvida sobre o material.</p>
-            <a href="https://wa.me/5521969836161?text=Olá, preciso de ajuda com o Pack de Atividades." class="cta-button"
+            <a href="https://wa.me/5521969836161?text=Olá, preciso de ajuda com o Pack de Atividades."
+                class="cta-button"
                 style="background-color: #128C7E; box-shadow: 0 5px 0 #075E54; max-width: 300px; margin: 0 auto; font-size: 18px;">
                 💬 Chamar no WhatsApp
             </a>
@@ -702,7 +726,7 @@
 
         // Proteção da página de obrigado
         document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('click', function(e) {
+            button.addEventListener('click', function (e) {
                 // Se for o botão do WhatsApp, não marcamos como compra iniciada (ou talvez sim, dependendo do desejo, mas aqui focamos na compra real)
                 if (this.href.includes('pay.lowify.com.br')) {
                     sessionStorage.setItem('purchase_initiated', 'true');
