@@ -4,211 +4,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acesso Liberado! - Combine e Cole</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Compra Confirmada! - TEA Members</title>
     <style>
         :root {
-            --primary: #10B981;
-            --primary-dark: #059669;
-            --text-dark: #1E293B;
+            --primary: #2D8B3E;
+            --bg: #F8FAFC;
+            --text: #1E293B;
             --text-muted: #64748B;
-            --bg-light: #F8FAFC;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            min-height: 100vh;
+            background-color: var(--bg);
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            max-width: 480px;
-            width: 100%;
             background: white;
-            padding: 40px 30px;
-            border-radius: 32px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            padding: 60px 40px;
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+            max-width: 500px;
+            width: 100%;
             text-align: center;
         }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
-
-        .subtitle {
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            font-size: 1rem;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            border: 2px solid #E2E8F0;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .input-group input:focus {
-            border-color: var(--primary);
-        }
-
-        .btn-main {
-            display: inline-flex;
+        .success-animation {
+            width: 100px;
+            height: 100px;
+            background: #F0FDF4;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            padding: 18px 32px;
-            border-radius: 16px;
-            font-weight: 800;
-            width: 100%;
+            font-size: 50px;
+            margin: 0 auto 30px;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        p.main-text {
+            color: var(--text-muted);
             font-size: 1.1rem;
-            transition: all 0.3s;
-            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
-            border: none;
-            cursor: pointer;
+            line-height: 1.6;
+            margin-bottom: 40px;
         }
 
-        .btn-main:hover {
-            transform: translateY(-2px);
-            background: var(--primary-dark);
+        .email-notice {
+            background: #F8FAFC;
+            border: 2px solid #F1F5F9;
+            padding: 30px;
+            border-radius: 25px;
+            margin-bottom: 40px;
+            position: relative;
         }
 
-        .btn-main:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
+        .email-notice h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .email-notice p {
+            color: var(--text);
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.5;
         }
 
         .btn-whatsapp {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: #F1F5F9;
-            color: #475569;
-            text-decoration: none;
-            padding: 14px 20px;
-            border-radius: 12px;
-            font-weight: 700;
+            gap: 10px;
             width: 100%;
-            font-size: 0.85rem;
-            margin-top: 20px;
+            background: #25D366;
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1rem;
+            transition: all 0.2s;
         }
 
-        #status-msg {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: block;
+        .btn-whatsapp:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
         }
 
-        .error {
-            color: #EF4444;
-        }
-
-        .success {
-            color: var(--primary);
+        .footer-text {
+            margin-top: 30px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Compra Aprovada!</h1>
-        <p class="subtitle">Informe seu e-mail de compra abaixo para liberar o seu material agora mesmo.</p>
+        <div class="success-animation">✓</div>
+        <h1>Tudo certo!</h1>
+        <p class="main-text">Sua compra foi aprovada e seu acesso está sendo preparado.</p>
 
-        <div class="input-group">
-            <label for="email-input">E-mail da Compra</label>
-            <input type="email" id="email-input" placeholder="seuemail@exemplo.com">
+        <div class="email-notice">
+            <h3>📧 Verifique seu e-mail</h3>
+            <p>Enviamos o seu link de acesso exclusivo para o seu e-mail de compra agora mesmo.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">
+                (Não esqueça de checar a pasta de Spam ou Promoções)
+            </p>
         </div>
 
-        <button id="verify-btn" class="btn-main">LIBERAR MEU ACESSO</button>
+        <a href="https://wa.me/5521969836161" class="btn-whatsapp">
+            PRECISA DE AJUDA? WHATSAPP
+        </a>
 
-        <span id="status-msg"></span>
-
-        <a href="https://wa.me/5521969836161" class="btn-whatsapp">PRECISA DE AJUDA? CHAME NO WHATSAPP</a>
+        <p class="footer-text">Equipe TEA Members - Acesso Vitalício Confirmado</p>
     </div>
-
-    <script>
-        const btn = document.getElementById('verify-btn');
-        const input = document.getElementById('email-input');
-        const status = document.getElementById('status-msg');
-
-        // Tenta pegar o email da URL se existir (conveniência)
-        const urlParams = new URLSearchParams(window.location.search);
-        const emailParam = urlParams.get('email') || urlParams.get('token');
-        if (emailParam && emailParam.includes('@')) {
-            input.value = emailParam;
-        }
-
-        btn.onclick = async () => {
-            const email = input.value.trim();
-            if (!email || !email.includes('@')) {
-                status.innerText = "Por favor, digite um e-mail válido.";
-                status.className = "error";
-                return;
-            }
-
-            btn.disabled = true;
-            btn.innerText = "VERIFICANDO...";
-            status.innerText = "";
-
-            try {
-                // Busca o acesso no banco de dados
-                const res = await fetch(`https://area-membros-nu.vercel.app/api/get-token?email=${encodeURIComponent(email)}&venda=${encodeURIComponent(email)}`);
-                const data = await res.json();
-
-                if (data.token) {
-                    status.innerText = "Acesso localizado! Redirecionando...";
-                    status.className = "success";
-                    setTimeout(() => {
-                        window.location.href = `https://area-membros-nu.vercel.app/?token=${data.token}`;
-                    }, 1000);
-                } else {
-                    status.innerText = "Acesso não encontrado. Verifique o e-mail ou aguarde 1 minuto.";
-                    status.className = "error";
-                    btn.disabled = false;
-                    btn.innerText = "LIBERAR MEU ACESSO";
-                }
-            } catch (e) {
-                status.innerText = "Erro de conexão. Tente novamente.";
-                status.className = "error";
-                btn.disabled = false;
-                btn.innerText = "LIBERAR MEU ACESSO";
-            }
-        };
-    </script>
 </body>
 
 </html>
